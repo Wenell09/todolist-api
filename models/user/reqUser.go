@@ -1,4 +1,4 @@
-package models
+package user
 
 type ReqUser struct {
 	Username string `json:"username"`

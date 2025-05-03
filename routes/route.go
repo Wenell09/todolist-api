@@ -7,9 +7,13 @@ import (
 
 func RouteApp(app *fiber.App) {
 	app.Get("/", controllers.HomeController)
+	// route user
 	app.Post("/api/register", controllers.RegisterUser)
 	app.Post("/api/login", controllers.LoginUser)
 	app.Get("/api/user/:user_id", controllers.GetUser)
 	app.Patch("/api/editUser/:user_id", controllers.EditUser)
 	app.Delete("/api/deleteUser/:user_id", controllers.DeleteUser)
+	// route todo
+	app.Post("/api/addTodo", controllers.AddTodo)
+	app.Get("/api/todo/:user_id", controllers.GetTodo)
 }
