@@ -41,7 +41,7 @@ func RegisterUser(c *fiber.Ctx) error {
 		Email:    results.Email,
 		Password: string(hash),
 	}
-	if err := database.DB.Where("email = ?", registUser.Email).First(&data).Error; err == nil {
+	if err := database.DB.First(&data, "email = ?", registUser.Email).Error; err == nil {
 		return c.Status(fiber.StatusConflict).JSON(ResponseMessage{
 			Status:  "error",
 			Message: "Email has been registered!",
@@ -74,7 +74,7 @@ func LoginUser(c *fiber.Ctx) error {
 		Password: results.Password,
 	}
 
-	if err := database.DB.Where("email = ?", loginUser.Email).First(&data).Error; err != nil {
+	if err := database.DB.First(&data, "email = ?", loginUser.Email).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(ResponseMessage{
 			Status:  "error",
 			Message: "make sure your email is registered!",
@@ -96,7 +96,7 @@ func LoginUser(c *fiber.Ctx) error {
 func GetUser(c *fiber.Ctx) error {
 	var data user.User
 	userId := c.Params("user_id")
-	if err := database.DB.Where("user_id = ?", userId).First(&data).Error; err != nil {
+	if err := database.DB.First(&data, "user_id = ?", userId).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(ResponseMessage{
 			Status:  "error",
 			Message: fmt.Sprintf("User with id:%s not found", userId),
@@ -122,7 +122,7 @@ func EditUser(c *fiber.Ctx) error {
 			Email:    results.Email,
 			Password: string(hash),
 		}
-		if err := database.DB.Where("user_id = ?", userId).First(&data).Error; err != nil {
+		if err := database.DB.First(&data, "user_id = ?", userId).Error; err != nil {
 			return c.Status(fiber.StatusNotFound).JSON(ResponseMessage{
 				Status:  "error",
 				Message: fmt.Sprintf("User with id:%s not found,failed to update!", userId),
@@ -139,7 +139,7 @@ func EditUser(c *fiber.Ctx) error {
 			Username: results.Username,
 			Email:    results.Email,
 		}
-		if err := database.DB.Where("user_id = ?", userId).First(&data).Error; err != nil {
+		if err := database.DB.First(&data, "user_id = ?", userId).Error; err != nil {
 			return c.Status(fiber.StatusNotFound).JSON(ResponseMessage{
 				Status:  "error",
 				Message: fmt.Sprintf("User with id:%s not found,failed to update!", userId),
@@ -161,7 +161,7 @@ func EditUser(c *fiber.Ctx) error {
 func DeleteUser(c *fiber.Ctx) error {
 	var data user.User
 	userId := c.Params("user_id")
-	if err := database.DB.Where("user_id = ?", userId).First(&data).Error; err != nil {
+	if err := database.DB.First(&data, "user_id = ?", userId).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(ResponseMessage{
 			Status:  "error",
 			Message: fmt.Sprintf("user with id:%s not found,failed to delete!", userId),
