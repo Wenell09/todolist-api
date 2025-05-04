@@ -16,4 +16,6 @@ func RouteApp(app *fiber.App) {
 	// route todo
 	app.Post("/api/addTodo", controllers.AddTodo)
 	app.Get("/api/todo/:user_id", controllers.GetTodo)
+	app.Patch("/api/editTodo/:todo_id", controllers.UpdateTodo)
+	app.Delete("/api/deleteTodo/:user_id/:todo_id?", controllers.DeleteTodo)
 }
