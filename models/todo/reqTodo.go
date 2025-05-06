@@ -5,4 +5,5 @@ type ReqTodo struct {
 	TodoDesc    string `json:"todo_desc"`
 	UserId      string `json:"user_id"`
 	PrioritasId string `json:"prioritas_id"`
+	StatusId    string `json:"status_id"`
 }

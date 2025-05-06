@@ -12,5 +12,7 @@ type ResTodo struct {
 	Username      string    `json:"username"`
 	PrioritasId   string    `json:"prioritas_id"`
 	PrioritasName string    `json:"prioritas_name"`
+	StatusId      string    `json:"status_id"`
+	StatusName    string    `json:"status_name"`
 	CreatedAt     time.Time `json:"created_at"`
 }
